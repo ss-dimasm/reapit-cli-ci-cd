@@ -31,6 +31,11 @@ jobs:
         run: yarn
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      
+      - name: Install Reapit CLI
+        run: npm i -g @reapit/cli
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: Build
         run: |
@@ -42,6 +47,7 @@ jobs:
           yarn reapit pipeline deploy-zip $PIPELINE_ID -y
         env:
           PIPELINE_ID: ${{secrets.PIPELINE_ID}}
+          
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
